@@ -34,7 +34,7 @@ DATASET=${DATASET:-CUB200}
 LABEL_SHIFT=${LABEL_SHIFT:-1}
 
 WEIGHTS=${WEIGHTS:-"../../03_Feature_Extraction/models/ft_${DATASET}_${MODEL_TYPE}.npz"}
-SVM_OUTPUT=${SVM_OUTPUT:-"../.out"}
+SVM_OUTPUT=${SVM_OUTPUT:-"../../.out"}
 TRAINED_SVM="${SVM_OUTPUT}/clf_svm_${DATASET}_GLOBAL.${MODEL_TYPE}_glob_only_sparse_coefs.npz"
 
 N_PARTS=${N_PARTS:-4}
