@@ -2,12 +2,6 @@
 
 source 00_config.sh
 
-if [[ -z $WEIGHTS ]]; then
-	echo "WEIGHTS variable is missing!"
-	exit -1
-fi
-
-OPTS="${OPTS} --weights ${WEIGHTS}"
 # OPTS="${OPTS} --visualize_coefs"
 # OPTS="${OPTS} --scale_features"
 

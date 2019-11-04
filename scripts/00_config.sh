@@ -32,6 +32,7 @@ PREPARE_TYPE=${PREPARE_TYPE:-model}
 
 DATASET=${DATASET:-CUB200}
 LABEL_SHIFT=${LABEL_SHIFT:-1}
+WEIGHTS=${WEIGHTS:-"../../03_Feature_Extraction/models/ft_${DATASET}_${MODEL_TYPE}.npz"}
 
 N_PARTS=${N_PARTS:-4}
 
@@ -40,6 +41,7 @@ N_PARTS=${N_PARTS:-4}
 OPTS="${OPTS} --gpu $GPU"
 OPTS="${OPTS} --K $N_PARTS"
 OPTS="${OPTS} --n_jobs $N_JOBS"
+OPTS="${OPTS} --weights ${WEIGHTS}"
 OPTS="${OPTS} --model_type $MODEL_TYPE"
 OPTS="${OPTS} --batch_size $BATCH_SIZE"
 OPTS="${OPTS} --input_size $INPUT_SIZE"
