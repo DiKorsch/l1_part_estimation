@@ -7,9 +7,9 @@ from contextlib import contextmanager
 from multiprocessing.dummy import Pool
 from multiprocessing.pool import AsyncResult
 
-from l1_svm_parts.utils import topk_decision
-from l1_svm_parts.utils import prepare_back
-from l1_svm_parts.utils import saliency_to_im
+from part_estimation.utils import topk_decision
+from part_estimation.utils import prepare_back
+from part_estimation.utils import saliency_to_im
 
 class ImageGradient(object):
 	"""

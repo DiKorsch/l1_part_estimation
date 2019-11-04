@@ -13,7 +13,7 @@ from cluster_parts.core import BoundingBoxPartExtractor
 from cluster_parts.utils import ClusterInitType
 from cluster_parts.utils import ThresholdType
 
-from l1_svm_parts.core.pipelines.base import BasePipeline
+from part_estimation.core.pipelines.base import BasePipeline
 
 class VisualizationPipeline(BasePipeline):
 

@@ -10,7 +10,7 @@ from multiprocessing import Pool, Manager
 
 from cluster_parts.core import BoundingBoxPartExtractor
 
-from l1_svm_parts.core.pipelines.base import BasePipeline
+from part_estimation.core.pipelines.base import BasePipeline
 
 class ExtractionPipeline(BasePipeline):
 

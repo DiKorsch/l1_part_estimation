@@ -7,7 +7,7 @@ from sklearn.preprocessing import MinMaxScaler
 from cvdatasets.annotations import AnnotationType
 from cvdatasets.utils import new_iterator
 
-from l1_svm_parts.utils import topk_decision
+from part_estimation.utils import topk_decision
 
 def evaluate_data(clf, data, subset, topk, scaler):
 
