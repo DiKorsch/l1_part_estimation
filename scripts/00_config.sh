@@ -6,15 +6,16 @@ if [[ ! -f /.dockerenv ]]; then
 fi
 
 if [[ $GDB == "1" ]]; then
-	PYTHON="gdb -ex run --args python"
+	PYTHON="gdb -ex run --args ${PYTHON:-python}"
 
 elif [[ $PROFILE == "1" ]]; then
-	PYTHON="python -m cProfile -o profile"
+	PYTHON="${PYTHON:-python} -m cProfile -o profile"
 
 else
-	PYTHON="python"
+	PYTHON="${PYTHON:-python}"
 
 fi
+
 
 SCRIPT="../main.py"
 DATA=${DATA:-/home/korsch/Data/info.yml}
