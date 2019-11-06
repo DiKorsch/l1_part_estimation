@@ -54,7 +54,7 @@ def main(args):
 		corrector=Corrector(gamma=args.gamma, sigma=args.sigma),
 
 		K=args.K,
-		fit_object=True,
+		fit_object=args.fit_object,
 
 		thresh_type=args.thresh_type,
 		cluster_init=ClusterInitType.MAXIMAS,
