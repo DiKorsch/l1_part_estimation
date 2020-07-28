@@ -4,7 +4,7 @@ import numpy as np
 
 from sklearn.preprocessing import MinMaxScaler
 
-from cvdatasets.annotations import AnnotationType
+from cvdatasets import AnnotationType
 from cvdatasets.utils import new_iterator
 
 from part_estimation.utils import topk_decision
@@ -34,20 +34,20 @@ class Data(abc.ABC):
 	@classmethod
 	def new(self, opts, clf=None):
 
-		annot_cls = AnnotationType.get(opts.dataset).value
-		parts_key = "{}_{}".format(opts.dataset, "GLOBAL")
+		assert opts.parts == "GLOBAL", \
+			f"Wrong parts selected: {opts.parts}. Should be \"GLOBAL\""
+		parts_key = f"{opts.dataset}_{opts.parts}"
 
+		annot = AnnotationType.new_annotation(opts, load_strict=False)
 		logging.info("Loading {} annotations from \"{}\"".format(
-			annot_cls, opts.data))
+			annot.__class__, opts.data))
 		logging.info("Using \"{}\"-parts".format(parts_key))
 
-		annot = annot_cls(root_or_infofile=opts.data, parts=parts_key, feature_model=opts.model_type)
 
-		data_info = annot.info
-		model_info = data_info.MODELS[opts.model_type]
-		part_info = data_info.PARTS[parts_key]
+		ds_info = annot.dataset_info
+		model_info = annot.info.MODELS[opts.model_type]
 
-		n_classes = part_info.n_classes + opts.label_shift
+		n_classes = ds_info.n_classes + opts.label_shift
 
 		data = annot.new_dataset(subset=None)
 		train_data, val_data = map(annot.new_dataset, ["train", "test"])

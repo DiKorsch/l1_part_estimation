@@ -37,6 +37,7 @@ def outputs(args):
 
 def main(args):
 
+	args.feature_model = args.model_type
 	clf = Model.load_svm(args.trained_svm, args.visualize_coefs)
 	scaler, it, *model_args = Data.new(args, clf)
 	model, prepare = Model.new(args, *model_args)
