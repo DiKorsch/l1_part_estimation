@@ -9,15 +9,15 @@ from cvdatasets.utils import new_iterator
 
 from part_estimation.utils import topk_decision
 
-def evaluate_data(clf, data, subset, topk, scaler):
+def evaluate_data(opts, clf, data, subset, scaler):
 
 	X = scaler.transform(data.features[:, -1])
-	y = data.labels
+	y = data.labels - opts.label_shift
 	pred = clf.decision_function(X).argmax(axis=1)
 	logging.info("Accuracy on {} subset: {:.4%}".format(subset, (pred == y).mean()))
 
-	topk_preds, topk_accu = topk_decision(X, y, clf=clf, topk=topk)
-	logging.info("Top{}-Accuracy on {} subset: {:.4%}".format(topk, subset, topk_accu))
+	topk_preds, topk_accu = topk_decision(X, y, clf=clf, topk=opts.topk)
+	logging.info("Top{}-Accuracy on {} subset: {:.4%}".format(opts.topk, subset, topk_accu))
 
 class IdentityScaler(object):
 	"""
@@ -77,7 +77,7 @@ class Data(abc.ABC):
 
 		if clf is not None:
 			for _data, subset in [(train_data, "training"), (val_data, "validation")]:
-				evaluate_data(clf, _data, subset, opts.topk, scaler)
+				evaluate_data(opts, clf, _data, subset, scaler)
 
 		return scaler, it, model_info, n_classes
 

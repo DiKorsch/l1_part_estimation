@@ -78,7 +78,6 @@ class Propagator(object):
 
 		self.topk_preds = topk_preds = self.evaluate_batch(_feats, labs)
 
-		gt_coefs = self.coefs[labs]
 		topk_pred_coefs = [self.coefs[p] for p in topk_preds.T]
 		pred_coefs = topk_pred_coefs[-1]
 
@@ -88,17 +87,11 @@ class Propagator(object):
 
 			self.full_im_grad = im_grad()
 
-			# gt_im_grad = im_grad(gt_coefs != 0)
-			# topk_pred_im_grad = [im_grad(p != 0) for p in topk_pred_coefs]
-
 			self.pred_im_grad = im_grad(topk_pred_coefs[-1] != 0)
 
 		else:
 
 			self.full_im_grad = self.pool.apply_async(im_grad)
-
-			# gt_im_grad = im_grad(gt_coefs != 0)
-			# topk_pred_im_grad = [im_grad(p != 0) for p in topk_pred_coefs]
 
 			self.pred_im_grad = self.pool.apply_async(im_grad,
 				args=(topk_pred_coefs[-1] != 0,))
